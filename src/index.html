@@ -10,24 +10,25 @@
 <body>
     <nav class="text-center p-4 font-bold shadow-md">Find Pokemon</nav>
     <section class="flex gap-3 mt-5 flex-wrap justify-center">
-        <span class="bg-red-400 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Kanto</span>
-        <span class="bg-sky-400 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Johto</span>
-        <span class="bg-green-400 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Hoenn</span>
-        <span class="bg-yellow-300 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Sinnoh</span>
-        <span class="bg-purple-400 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Unova</span>
-        <span class="bg-emerald-400 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Kalos</span>
-        <span class="bg-orange-400 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Alola</span>
-        <span class="bg-blue-400 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Galar</span>
-        <span class="bg-fuchsia-400 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Hisui</span>
-        <span class="bg-amber-300 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Paldea</span>
+        <span id="kanto" class="bg-red-400 hover:bg-red-500 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Kanto</span>
+        <span id="johto" class="bg-sky-400 hover:bg-sky-500 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Johto</span>
+        <span id="hoenn" class="bg-green-400 hover:bg-green-500 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Hoenn</span>
+        <span id="sinnoh" class="bg-yellow-300 hover:bg-yellow-400 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Sinnoh</span>
+        <span id="unova" class="bg-purple-400 hover:bg-purple-500 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Unova</span>
+        <span id="kalos" class="bg-emerald-400 hover:bg-emerald-500 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Kalos</span>
+        <span id="alola" class="bg-orange-400 hover:bg-orange-500 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Alola</span>
+        <span id="galar" class="bg-blue-400 hover:bg-blue-500 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Galar</span>
+        <span id="hisui" class="bg-fuchsia-400 hover:bg-fuchsia-500 px-6 py-1 w-24 border-box text-center rounded-lg font-bold cursor-pointer">Hisui</span>
     </section>
-    <section class="flex gap-4 mt-20 flex-wrap justify-center">
-        <div class="text-center p-4 shadow-[0px_0px_10px_3px_gray] rounded-lg max-w-[200px]">
-            <div>
-                <img class="m-auto" src="https://www.freeiconspng.com/thumbs/pokemon-png/render-pokemon-png-1.png" alt="Pokemon-IMG">
-            </div>
-            <div class="font-bold">Charmander</div>
-            <button class="bg-red-400 mt-5 py-1 w-full rounded-lg">More info</button>
+    <section class="mt-9 w-[100%] pb-[30px]">
+        <div id="boxPokemon" class="grid grid-cols-[repeat(auto-fill,_130px)] sm:grid-cols-[repeat(auto-fill,_160px)] min-[920px]:grid-cols-[repeat(auto-fill,_200px)] gap-[10px] sm:gap-[20px] min-[920px]:gap-[30px] justify-center">
+            <!-- <div class="text-center p-1 sm:p-4 shadow-[0px_0px_5px_0px_gray] rounded-lg w-[130px] sm:w-[200px] border-box">
+                <div>
+                    <img class="m-auto" src="https://www.freeiconspng.com/thumbs/pokemon-png/render-pokemon-png-1.png" alt="Pokemon-IMG">
+                </div>
+                <div class="font-bold">Charmander</div>
+                <button class="bg-red-400 hover:bg-red-500 mt-2 py-1 w-full rounded-lg">More info</button>
+            </div> -->
         </div>
     </section>
     <script refer src="./assets/main.js"></script>
