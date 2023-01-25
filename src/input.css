@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ul li {
+    padding: 6px 12px;
+    transition: 0.2s background;
+    cursor: pointer;
+}
+ul li:hover {
+    background: #e6f0f2;
+}
+ul li + li {
+    border-top: 1px solid #bfc8c9;
+}
+.hidden {
+    display: none;
+} */
