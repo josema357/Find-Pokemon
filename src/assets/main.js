@@ -8,6 +8,7 @@ const btnKalos=document.getElementById('kalos');
 const btnAlola=document.getElementById('alola');
 const btnGalar=document.getElementById('galar');
 const inputElment=document.getElementById('input-search');
+const resultsElem=document.getElementById('autocomplete-results');
 
 const API='https://pokeapi.co/api/v2/';
 
@@ -16,7 +17,10 @@ let counter=0;
 let region=sessionStorage.getItem("region") || 2;
 console.log(region)
 let pokeLength;
+let pokeFiltered=[];
 
+//First fetch
+fetchData(`${API}pokedex/${region}`,15);
 
 let options={
     threshold: 1.0
@@ -72,6 +76,7 @@ async function loadBoxPokemon(pokename){
 async function fetchData(urlAPI,num){
     const response=await fetch(urlAPI);
     const data=await response.json();
+    pokeFiltered=[];
     pokeLength=data.pokemon_entries.length-1;
     for (let i = 0; i < num ; i++) {
         if(counter > data.pokemon_entries.length-1) {break}
@@ -80,68 +85,114 @@ async function fetchData(urlAPI,num){
         counter++;
         if(i == num-1) {observer.observe(boxPokemon.lastChild);}
     }
+    await data.pokemon_entries.map(element=>{
+        pokeFiltered.push(element.pokemon_species.name)
+    })
 }
 
 //autocomplete-search
-inputElment.addEventListener("keydown",(e)=>{
+resultsElem.addEventListener("click",(event)=>{
+    handleResult(event);
+})
+
+inputElment.addEventListener("keyup",(e)=>{
     autocomplete(e);
 })
 
 function autocomplete(e){
     console.log("Evento keydown")
-    console.log(e)
+    const value=inputElment.value;
+    const results=pokeFiltered.filter(poke=>{
+        return poke.toLowerCase().startsWith(value.toLowerCase().trim());
+    })
+    resultsElem.innerHTML=results.map((result, index)=>{
+        const isSelected=index===0;
+        return `
+            <li
+            id='autocomplete-result-${index}'
+            class='autocomplete-result${isSelected ? ' selected' : ''} capitalize'
+            role='option'
+            ${isSelected ? "aria-selected='true'" : ''}
+            >
+            ${result}
+            </li>
+        `
+    }).join('');
+    resultsElem.classList.remove('hidden');
 }
 
-fetchData(`${API}pokedex/${region}`,15);
+function handleResult(event){
+    if(event.target && event.target.nodeName==='LI'){
+        selectItem(event.target);
+    }
+}
+function selectItem(node){
+    if(node){
+        inputElment.value=node.innerText;
+        hideResults();
+    }
+}
+function hideResults(){
+    resultsElem.innerHTML='';
+    resultsElem.classList.add('hidden');
+}
 
 //Event listener buttons 
 btnKanto.addEventListener("click",()=>{
     counter=0;
-    sessionStorage.setItem("region",2) 
+    sessionStorage.setItem("region",2);
     boxPokemon.innerHTML=''
-    fetchData(`${API}pokedex/2`,15)
+    hideResults();
+    fetchData(`${API}pokedex/2`,15);
 })
 btnJohto.addEventListener("click",()=>{
     counter=0;
-    sessionStorage.setItem("region",7) 
-    boxPokemon.innerHTML=''
-    fetchData(`${API}pokedex/7`,15)
+    sessionStorage.setItem("region",7);
+    boxPokemon.innerHTML='';
+    hideResults();
+    fetchData(`${API}pokedex/7`,15);
 })
 btnHoenn.addEventListener("click",()=>{
     counter=0;
-    sessionStorage.setItem("region",15) 
-    boxPokemon.innerHTML=''
-    fetchData(`${API}pokedex/15`,15)
+    sessionStorage.setItem("region",15);
+    boxPokemon.innerHTML='';
+    hideResults();
+    fetchData(`${API}pokedex/15`,15);
 })
 btnSinnoh.addEventListener("click",()=>{
     counter=0;
-    sessionStorage.setItem("region",6) 
-    boxPokemon.innerHTML=''
-    fetchData(`${API}pokedex/6`,15)
+    sessionStorage.setItem("region",6);
+    boxPokemon.innerHTML='';
+    hideResults();
+    fetchData(`${API}pokedex/6`,15);
 })
 btnUnova.addEventListener("click",()=>{
     counter=0;
-    sessionStorage.setItem("region",9) 
-    boxPokemon.innerHTML=''
-    fetchData(`${API}pokedex/9`,15)
+    sessionStorage.setItem("region",9); 
+    boxPokemon.innerHTML='';
+    hideResults();
+    fetchData(`${API}pokedex/9`,15);
 })
 btnKalos.addEventListener("click",()=>{
     counter=0;
-    sessionStorage.setItem("region",12) 
-    boxPokemon.innerHTML=''
-    fetchData(`${API}pokedex/12`,15)
+    sessionStorage.setItem("region",12);
+    boxPokemon.innerHTML='';
+    hideResults();
+    fetchData(`${API}pokedex/12`,15);
 })
 btnAlola.addEventListener("click",()=>{
     counter=0;
-    sessionStorage.setItem("region",16) 
-    boxPokemon.innerHTML=''
-    fetchData(`${API}pokedex/16`,15)
+    sessionStorage.setItem("region",16);
+    boxPokemon.innerHTML='';
+    hideResults();
+    fetchData(`${API}pokedex/16`,15);
 })
 btnGalar.addEventListener("click",()=>{
     counter=0;
-    sessionStorage.setItem("region",27) 
-    boxPokemon.innerHTML=''
-    fetchData(`${API}pokedex/27`,15)
+    sessionStorage.setItem("region",27);
+    boxPokemon.innerHTML='';
+    hideResults();
+    fetchData(`${API}pokedex/27`,15);
 })
 
 
