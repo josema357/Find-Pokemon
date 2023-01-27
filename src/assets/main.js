@@ -9,18 +9,37 @@ const btnAlola=document.getElementById('alola');
 const btnGalar=document.getElementById('galar');
 const inputElment=document.getElementById('input-search');
 const resultsElem=document.getElementById('autocomplete-results');
+const btnSearch=document.getElementById('btn-search');
 
 const API='https://pokeapi.co/api/v2/';
 
-
+let abortController=null;
 let counter=0;
 let region=sessionStorage.getItem("region") || 2;
 console.log(region)
 let pokeLength;
 let pokeFiltered=[];
 
+document.addEventListener("click",()=>{
+    resultsElem.classList.add('hidden')
+})
+
+//Search button
+btnSearch.addEventListener("click",searchPokemon);
+async function searchPokemon(){
+    if(pokeFiltered.indexOf(inputElment.value.toLowerCase())!==-1){
+        boxPokemon.innerHTML='';
+        hideResults();
+        const foundPokemon= await loadBoxPokemon(inputElment.value.toLowerCase());
+        boxPokemon.appendChild(foundPokemon)
+    }else{
+        console.log('NADA')
+    }
+    
+}
+
 //First fetch
-fetchData(`${API}pokedex/${region}`,15);
+fetchData(`${API}pokedex/${region}`,30);
 
 let options={
     threshold: 1.0
@@ -30,7 +49,7 @@ const observer=new IntersectionObserver(loadMoreBox,options);
 //Function to observe an element
 function loadMoreBox(entry){
     if(entry[0].isIntersecting && counter<=pokeLength){
-        fetchData(`${API}pokedex/${region}`,15);
+        fetchData(`${API}pokedex/${sessionStorage.getItem("region")||region}`,10);
     }
 }
 
@@ -74,9 +93,12 @@ async function loadBoxPokemon(pokename){
 
 //Function to bring the list of pokemon
 async function fetchData(urlAPI,num){
-    const response=await fetch(urlAPI);
+    abortController=new AbortController();
+    const signal=abortController.signal;
+    const response=await fetch(urlAPI,signal);
     const data=await response.json();
     pokeFiltered=[];
+    console.log(pokeFiltered);
     pokeLength=data.pokemon_entries.length-1;
     for (let i = 0; i < num ; i++) {
         if(counter > data.pokemon_entries.length-1) {break}
@@ -95,12 +117,15 @@ resultsElem.addEventListener("click",(event)=>{
     handleResult(event);
 })
 
-inputElment.addEventListener("keyup",(e)=>{
+inputElment.addEventListener("input",(e)=>{
     autocomplete(e);
 })
+inputElment.addEventListener("keyup",(event)=>{
+    handleResultKeydown(event)
+})
 
-function autocomplete(e){
-    console.log("Evento keydown")
+function autocomplete(){
+    console.log("Evento input")
     const value=inputElment.value;
     const results=pokeFiltered.filter(poke=>{
         return poke.toLowerCase().startsWith(value.toLowerCase().trim());
@@ -126,9 +151,34 @@ function handleResult(event){
         selectItem(event.target);
     }
 }
+function handleResultKeydown(e){
+    const {key}=e;
+    switch (key){
+        case 'Backspace':
+            return;
+        case 'Enter':
+            searchPokemon();
+            inputElment.setSelectionRange(inputElment.value.length,inputElment.value.length);
+        default:
+            selectFirstResult();
+    }
+}
+function selectFirstResult(){
+    const value=inputElment.value;
+    const autocompleteValue=resultsElem.querySelector(".selected");
+    if(!value || !autocompleteValue){
+        return;
+    }
+    if(value !==autocompleteValue.innerText){
+        inputElment.value=autocompleteValue.innerText;
+        inputElment.setSelectionRange(value.length,autocompleteValue.innerText.length);
+        console.log(inputElment.value)
+    }
+}
 function selectItem(node){
     if(node){
         inputElment.value=node.innerText;
+        searchPokemon();
         hideResults();
     }
 }
@@ -139,86 +189,83 @@ function hideResults(){
 
 //Event listener buttons 
 btnKanto.addEventListener("click",()=>{
+    if(abortController){
+        abortController.abort();
+        console.log('cancelando')
+    }
     counter=0;
     sessionStorage.setItem("region",2);
     boxPokemon.innerHTML=''
     hideResults();
-    fetchData(`${API}pokedex/2`,15);
+    fetchData(`${API}pokedex/2`,30);
 })
 btnJohto.addEventListener("click",()=>{
+    if(abortController){
+        abortController.abort();
+    }
     counter=0;
     sessionStorage.setItem("region",7);
     boxPokemon.innerHTML='';
     hideResults();
-    fetchData(`${API}pokedex/7`,15);
+    fetchData(`${API}pokedex/7`,30);
 })
 btnHoenn.addEventListener("click",()=>{
+    if(abortController){
+        abortController.abort();
+    }
     counter=0;
     sessionStorage.setItem("region",15);
     boxPokemon.innerHTML='';
     hideResults();
-    fetchData(`${API}pokedex/15`,15);
+    fetchData(`${API}pokedex/15`,30);
 })
 btnSinnoh.addEventListener("click",()=>{
+    if(abortController){
+        abortController.abort();
+    }
     counter=0;
     sessionStorage.setItem("region",6);
     boxPokemon.innerHTML='';
     hideResults();
-    fetchData(`${API}pokedex/6`,15);
+    fetchData(`${API}pokedex/6`,30);
 })
 btnUnova.addEventListener("click",()=>{
+    if(abortController){
+        abortController.abort();
+    }
     counter=0;
     sessionStorage.setItem("region",9); 
     boxPokemon.innerHTML='';
     hideResults();
-    fetchData(`${API}pokedex/9`,15);
+    fetchData(`${API}pokedex/9`,30);
 })
 btnKalos.addEventListener("click",()=>{
+    if(abortController){
+        abortController.abort();
+    }
     counter=0;
     sessionStorage.setItem("region",12);
     boxPokemon.innerHTML='';
     hideResults();
-    fetchData(`${API}pokedex/12`,15);
+    fetchData(`${API}pokedex/12`,30);
 })
 btnAlola.addEventListener("click",()=>{
+    if(abortController){
+        abortController.abort();
+    }
     counter=0;
     sessionStorage.setItem("region",16);
     boxPokemon.innerHTML='';
     hideResults();
-    fetchData(`${API}pokedex/16`,15);
+    fetchData(`${API}pokedex/16`,30);
 })
 btnGalar.addEventListener("click",()=>{
+    if(abortController){
+        abortController.abort();
+    }
     counter=0;
     sessionStorage.setItem("region",27);
     boxPokemon.innerHTML='';
     hideResults();
-    fetchData(`${API}pokedex/27`,15);
+    fetchData(`${API}pokedex/27`,30);
 })
-
-
-/*
-for(const pokeName of data.pokemon_entries){
-    await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName.pokemon_species.name}`)
-        .then(pokeResponse=>pokeResponse.json())
-        .then(pokeData=>{
-            boxPokemon.insertAdjacentHTML("beforeend",`
-            <div class="text-center p-1 sm:p-4 shadow-[0px_0px_5px_0px_gray] rounded-lg w-[130px] sm:w-[160px] min-[920px]:w-[200px] border-box">
-                <div>
-                    <img class="m-auto" src="${pokeData.sprites.front_default}" alt="Pokemon-IMG">
-                </div>
-                <div class="font-bold capitalize">${pokeData.species.name}</div>
-                <button class="bg-red-400 hover:bg-red-500 mt-2 py-1 w-full rounded-lg">More info</button>
-            </div>
-            `) 
-        })
-        .catch(()=>{
-            boxPokemon.insertAdjacentHTML("beforeend",`
-            <div class="text-center p-1 sm:p-4 shadow-[0px_0px_5px_0px_gray] rounded-lg w-[130px] sm:w-[160px] min-[920px]:w-[200px] border-box">
-                <div>
-                    <img class="m-auto my-[12px]" src="./assets/images/poke.png" alt="Pokemon-IMG">
-                </div>
-                <div class="font-bold capitalize">${pokeName.pokemon_species.name}</div>
-                <button class="bg-red-400 hover:bg-red-500 mt-2 py-1 w-full rounded-lg">More info</button>
-            </div>
-            `)
-        })*/
