@@ -16,7 +16,6 @@ const API='https://pokeapi.co/api/v2/';
 let abortController=null;
 let counter=0;
 let region=sessionStorage.getItem("region") || 2;
-console.log(region)
 let pokeLength;
 let pokeFiltered=[];
 
@@ -33,7 +32,10 @@ async function searchPokemon(){
         const foundPokemon= await loadBoxPokemon(inputElment.value.toLowerCase());
         boxPokemon.appendChild(foundPokemon)
     }else{
-        console.log('NADA')
+        region=sessionStorage.getItem("region")
+        boxPokemon.innerHTML='';
+        counter=0
+        fetchData(`${API}pokedex/${region}`,30);
     }
     
 }
@@ -59,6 +61,7 @@ async function loadBoxPokemon(pokename){
     try {
         let response=await fetch(`https://pokeapi.co/api/v2/pokemon/${pokename}`);
         let data=await response.json()
+        console.log(data)
         imgpokemon=data.sprites.front_default;
     } catch (error) {
         imgpokemon='./assets/images/poke.png';
@@ -98,7 +101,6 @@ async function fetchData(urlAPI,num){
     const response=await fetch(urlAPI,signal);
     const data=await response.json();
     pokeFiltered=[];
-    console.log(pokeFiltered);
     pokeLength=data.pokemon_entries.length-1;
     for (let i = 0; i < num ; i++) {
         if(counter > data.pokemon_entries.length-1) {break}
@@ -125,7 +127,6 @@ inputElment.addEventListener("keyup",(event)=>{
 })
 
 function autocomplete(){
-    console.log("Evento input")
     const value=inputElment.value;
     const results=pokeFiltered.filter(poke=>{
         return poke.toLowerCase().startsWith(value.toLowerCase().trim());
@@ -172,7 +173,6 @@ function selectFirstResult(){
     if(value !==autocompleteValue.innerText){
         inputElment.value=autocompleteValue.innerText;
         inputElment.setSelectionRange(value.length,autocompleteValue.innerText.length);
-        console.log(inputElment.value)
     }
 }
 function selectItem(node){
@@ -191,7 +191,6 @@ function hideResults(){
 btnKanto.addEventListener("click",()=>{
     if(abortController){
         abortController.abort();
-        console.log('cancelando')
     }
     counter=0;
     sessionStorage.setItem("region",2);
