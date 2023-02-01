@@ -7,19 +7,10 @@
     <title>Find Pokemon</title>
     <link href="/dist/output.css" rel="stylesheet">
 </head>
-<body>
-    <nav class="text-center p-4 font-bold shadow-md max-[160px]:px-0">Find Pokemon</nav>
-    <section class="absolute top-[56px] bg-[rgba(0,0,0,0.9)] w-full h-[calc(100vh_-_56px)] z-20 flex justify-center items-center">
-        <div class="bg-white w-full max-w-[400px] flex flex-col items-center rounded-lg pb-[20px] relative">
-            <div class="grid grid-cols-[1fr] min-[250px]:grid-cols-[repeat(2,_1fr)] min-[250px]:gap-y-[20px] gap-x-[40px] pt-[45px]">
-                <img class="m-auto" src="./assets/images/poke.png" alt="">
-                <img class="m-auto" src="./assets/images/poke.png" alt="">
-                <img class="m-auto" src="./assets/images/poke.png" alt="">
-                <img class="m-auto" src="./assets/images/poke.png" alt="">
-            </div>
-            <div class="font-bold">Pokemon</div>
-            <div class="font-bold">Region</div>
-            <div class="absolute w-full flex justify-end p-[5px]"><img id="close" class="cursor-pointer" src="./assets/images/close.svg" alt=""></div>
+<body class="bg-[url('../src/assets/images/imageBackground.jpg')] bg-cover bg-no-repeat bg-center bg-fixed z-0">
+    <nav class="text-center p-4 font-bold shadow-md max-[160px]:px-0 z-10">Find Pokemon</nav>
+    <section id="moreinfo" class=" hidden fixed bg-[rgba(0,0,0,0.9)] w-full h-screen top-[0] z-20 flex justify-center items-center">
+        <div id="moreinfo-panel" class="bg-white w-[90%] max-w-[300px] flex flex-col items-center rounded-lg pb-[20px] relative m-auto">
         </div>
     </section>
     <section class="flex gap-3 mt-5 flex-wrap justify-center">

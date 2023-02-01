@@ -547,6 +547,10 @@ video {
   }
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -555,20 +559,24 @@ video {
   position: relative;
 }
 
+.top-\[0\] {
+  top: 0;
+}
+
 .top-\[100\%\] {
   top: 100%;
 }
 
-.top-\[56px\] {
-  top: 56px;
+.z-20 {
+  z-index: 20;
 }
 
 .z-10 {
   z-index: 10;
 }
 
-.z-20 {
-  z-index: 20;
+.z-0 {
+  z-index: 0;
 }
 
 .m-auto {
@@ -613,57 +621,45 @@ video {
   display: none;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .h-min {
   height: -moz-min-content;
   height: min-content;
-}
-
-.h-\[calc\(100vh_-_56px\)\] {
-  height: calc(100vh - 56px);
 }
 
 .max-h-\[222px\] {
   max-height: 222px;
 }
 
-.w-24 {
-  width: 6rem;
-}
-
 .w-full {
   width: 100%;
+}
+
+.w-\[90\%\] {
+  width: 90%;
+}
+
+.w-24 {
+  width: 6rem;
 }
 
 .w-\[100\%\] {
   width: 100%;
 }
 
-.w-\[130px\] {
-  width: 130px;
-}
-
 .w-\[200px\] {
   width: 200px;
 }
 
-.w-\[500px\] {
-  width: 500px;
+.max-w-\[300px\] {
+  max-width: 300px;
 }
 
 .max-w-\[400px\] {
   max-width: 400px;
-}
-
-.max-w-\[500px\] {
-  max-width: 500px;
-}
-
-.max-w-\[100\%\] {
-  max-width: 100%;
-}
-
-.max-w-\[600px\] {
-  max-width: 600px;
 }
 
 .cursor-pointer {
@@ -676,18 +672,6 @@ video {
 
 .grid-cols-\[repeat\(auto-fill\2c _130px\)\] {
   grid-template-columns: repeat(auto-fill, 130px);
-}
-
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-.grid-cols-\[repeat\(auto-fill\2c _1fr\)\] {
-  grid-template-columns: repeat(auto-fill, 1fr);
-}
-
-.grid-cols-\[repeat\(2\2c _1fr\)\] {
-  grid-template-columns: repeat(2, 1fr);
 }
 
 .grid-cols-\[1fr\] {
@@ -726,33 +710,9 @@ video {
   gap: 10px;
 }
 
-.gap-4 {
-  gap: 1rem;
-}
-
-.gap-5 {
-  gap: 1.25rem;
-}
-
-.gap-6 {
-  gap: 1.5rem;
-}
-
-.gap-\[20px\] {
-  gap: 20px;
-}
-
-.gap-y-\[20px\] {
-  row-gap: 20px;
-}
-
-.gap-x-\[40px\] {
-  -moz-column-gap: 40px;
-       column-gap: 40px;
-}
-
-.overflow-hidden {
-  overflow: hidden;
+.gap-x-\[10px\] {
+  -moz-column-gap: 10px;
+       column-gap: 10px;
 }
 
 .overflow-y-scroll {
@@ -769,6 +729,15 @@ video {
 
 .border-\[1px_solid_\#bfc8c9\] {
   border-color: 1px solid #bfc8c9;
+}
+
+.bg-\[rgba\(0\2c 0\2c 0\2c 0\.9\)\] {
+  background-color: rgba(0,0,0,0.9);
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-red-400 {
@@ -816,42 +785,53 @@ video {
   background-color: rgb(250 250 250 / var(--tw-bg-opacity));
 }
 
-.bg-\[rbga\(82\2c 82\2c 82\2c 0\.5\)\] {
-  background-color: rbga(82,82,82,0.5);
-}
-
-.bg-\[rbga\(82_82_82_0\.5\)\] {
-  background-color: rbga(82 82 82 0.5);
-}
-
-.bg-\[rbga\(82\2c _82\2c _82\2c _0\.5\)\] {
-  background-color: rbga(82, 82, 82, 0.5);
-}
-
-.bg-\[rbg\(82\2c 82\2c 82\)\] {
-  background-color: rbg(82,82,82);
-}
-
-.bg-slate-300 {
+.bg-\[red\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+  background-color: rgb(255 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-\[rgba\(82\2c 82\2c 82\2c 0\.5\)\] {
-  background-color: rgba(82,82,82,0.5);
+.bg-\[url\(\'\.\/assets\/images\/imageBackground\.webp\'\)\] {
+  background-image: url('./assets/images/imageBackground.webp');
 }
 
-.bg-\[rgba\(0\2c 0\2c 0\2c 0\.5\)\] {
-  background-color: rgba(0,0,0,0.5);
+.bg-\[url\(\'\.\.\/assets\/images\/imageBackground\.webp\'\)\] {
+  background-image: url('../assets/images/imageBackground.webp');
 }
 
-.bg-\[rgba\(0\2c 0\2c 0\2c 0\.9\)\] {
-  background-color: rgba(0,0,0,0.9);
+.bg-\[url\(\'assets\/images\/imageBackground\.webp\'\)\] {
+  background-image: url('assets/images/imageBackground.webp');
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+.bg-\[url\(\'\.\/assets\/images\/imageBackground\.jpg\'\)\] {
+  background-image: url('./assets/images/imageBackground.jpg');
+}
+
+.bg-\[url\(\'assets\/images\/imageBackground\.jpg\'\)\] {
+  background-image: url('assets/images/imageBackground.jpg');
+}
+
+.bg-\[url\(\'\.\/assets\/images\/ui-mobile\.jpg\'\)\] {
+  background-image: url('./assets/images/ui-mobile.jpg');
+}
+
+.bg-\[url\(\'\.\.\/src\/assets\/images\/imageBackground\.jpg\'\)\] {
+  background-image: url('../src/assets/images/imageBackground.jpg');
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-fixed {
+  background-attachment: fixed;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
 }
 
 .p-4 {
@@ -889,19 +869,8 @@ video {
   padding-bottom: 10px;
 }
 
-.py-\[20px\] {
-  padding-top: 20px;
+.pb-\[20px\] {
   padding-bottom: 20px;
-}
-
-.py-\[30px\] {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
-.py-\[25px\] {
-  padding-top: 25px;
-  padding-bottom: 25px;
 }
 
 .pl-\[12px\] {
@@ -912,26 +881,6 @@ video {
   padding-bottom: 30px;
 }
 
-.pb-px {
-  padding-bottom: 1px;
-}
-
-.pb-\[20px\] {
-  padding-bottom: 20px;
-}
-
-.pt-\[25px\] {
-  padding-top: 25px;
-}
-
-.pt-\[40px\] {
-  padding-top: 40px;
-}
-
-.pt-\[50px\] {
-  padding-top: 50px;
-}
-
 .pt-\[45px\] {
   padding-top: 45px;
 }
@@ -940,25 +889,34 @@ video {
   text-align: center;
 }
 
-.text-right {
-  text-align: right;
-}
-
 .text-\[16px\] {
   font-size: 16px;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .font-bold {
   font-weight: 700;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 .capitalize {
   text-transform: capitalize;
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+.tracking-wider {
+  letter-spacing: 0.05em;
 }
 
 .shadow-md {
@@ -1073,37 +1031,10 @@ ul li + li {
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
-@media (max-width: 250px) {
-  .max-\[250px\]\:grid-cols-\[_1fr\] {
-    grid-template-columns: 1fr;
-  }
-
-  .max-\[250px\]\:grid-cols-\[1fr\] {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 160px) {
   .max-\[160px\]\:px-0 {
     padding-left: 0px;
     padding-right: 0px;
-  }
-
-  .max-\[160px\]\:content-\[url\(\'\.\/assets\/images\/pokeball\.svg\'\)\] {
-    --tw-content: url('./assets/images/pokeball.svg');
-    content: var(--tw-content);
-  }
-
-  .max-\[160px\]\:content-\[url\(\'\.\/assets\/images\/pokeball\.png\'\)\] {
-    --tw-content: url('./assets/images/pokeball.png');
-    content: var(--tw-content);
-  }
-}
-
-@media (min-width: 160px) {
-  .min-\[160px\]\:content-\[url\(\'\.\/assets\/images\/pokeball\.png\'\)\] {
-    --tw-content: url('./assets/images/pokeball.png');
-    content: var(--tw-content);
   }
 }
 
@@ -1112,16 +1043,12 @@ ul li + li {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .min-\[250px\]\:gap-y-\[20px\] {
-    row-gap: 20px;
+  .min-\[250px\]\:gap-y-\[10px\] {
+    row-gap: 10px;
   }
 }
 
 @media (min-width: 640px) {
-  .sm\:w-\[200px\] {
-    width: 200px;
-  }
-
   .sm\:w-\[160px\] {
     width: 160px;
   }
@@ -1140,10 +1067,6 @@ ul li + li {
 }
 
 @media (min-width: 920px) {
-  .min-\[920px\]\:grid-cols-\[repeat\(auto-fill\2c _200px\)\] {
-    grid-template-columns: repeat(auto-fill, 200px);
-  }
-
   .min-\[920px\]\:grid-cols-\[repeat\(auto-fill\2c _160px\)\] {
     grid-template-columns: repeat(auto-fill, 160px);
   }

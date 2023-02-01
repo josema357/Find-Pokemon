@@ -10,6 +10,10 @@ const btnGalar=document.getElementById('galar');
 const inputElment=document.getElementById('input-search');
 const resultsElem=document.getElementById('autocomplete-results');
 const btnSearch=document.getElementById('btn-search');
+let  btnCloseMoreInfo;
+const moreInfoPanel=document.getElementById('moreinfo');
+const curtainMoreInfo=document.getElementById('moreinfo-panel');
+
 
 const API='https://pokeapi.co/api/v2/';
 
@@ -18,6 +22,7 @@ let counter=0;
 let region=sessionStorage.getItem("region") || 2;
 let pokeLength;
 let pokeFiltered=[];
+let currentRegion=sessionStorage.getItem("currentRegion") || "kanto";
 
 document.addEventListener("click",()=>{
     resultsElem.classList.add('hidden')
@@ -61,7 +66,6 @@ async function loadBoxPokemon(pokename){
     try {
         let response=await fetch(`https://pokeapi.co/api/v2/pokemon/${pokename}`);
         let data=await response.json()
-        console.log(data)
         imgpokemon=data.sprites.front_default;
     } catch (error) {
         imgpokemon='./assets/images/poke.png';
@@ -80,6 +84,8 @@ async function loadBoxPokemon(pokename){
     secondChild.classList.add('font-bold','capitalize');
     const button=document.createElement("BUTTON");
     button.classList.add('bg-red-400','hover:bg-red-500','mt-2','py-1','w-full','rounded-lg');
+    button.setAttribute('id','btnMoreInfo')
+    button.addEventListener('click',showMoreInfo);
 
     pokeimage.setAttribute('src',`${imgpokemon}`);
     
@@ -194,6 +200,7 @@ btnKanto.addEventListener("click",()=>{
     }
     counter=0;
     sessionStorage.setItem("region",2);
+    sessionStorage.setItem("currentRegion","kanto");
     boxPokemon.innerHTML=''
     hideResults();
     fetchData(`${API}pokedex/2`,30);
@@ -204,6 +211,7 @@ btnJohto.addEventListener("click",()=>{
     }
     counter=0;
     sessionStorage.setItem("region",7);
+    sessionStorage.setItem("currentRegion","johto");
     boxPokemon.innerHTML='';
     hideResults();
     fetchData(`${API}pokedex/7`,30);
@@ -214,6 +222,7 @@ btnHoenn.addEventListener("click",()=>{
     }
     counter=0;
     sessionStorage.setItem("region",15);
+    sessionStorage.setItem("currentRegion","hoenn");
     boxPokemon.innerHTML='';
     hideResults();
     fetchData(`${API}pokedex/15`,30);
@@ -224,6 +233,7 @@ btnSinnoh.addEventListener("click",()=>{
     }
     counter=0;
     sessionStorage.setItem("region",6);
+    sessionStorage.setItem("currentRegion","sinnoh");
     boxPokemon.innerHTML='';
     hideResults();
     fetchData(`${API}pokedex/6`,30);
@@ -234,6 +244,7 @@ btnUnova.addEventListener("click",()=>{
     }
     counter=0;
     sessionStorage.setItem("region",9); 
+    sessionStorage.setItem("currentRegion","unova");
     boxPokemon.innerHTML='';
     hideResults();
     fetchData(`${API}pokedex/9`,30);
@@ -244,6 +255,7 @@ btnKalos.addEventListener("click",()=>{
     }
     counter=0;
     sessionStorage.setItem("region",12);
+    sessionStorage.setItem("currentRegion","kalos");
     boxPokemon.innerHTML='';
     hideResults();
     fetchData(`${API}pokedex/12`,30);
@@ -254,6 +266,7 @@ btnAlola.addEventListener("click",()=>{
     }
     counter=0;
     sessionStorage.setItem("region",16);
+    sessionStorage.setItem("currentRegion","alola");
     boxPokemon.innerHTML='';
     hideResults();
     fetchData(`${API}pokedex/16`,30);
@@ -264,7 +277,49 @@ btnGalar.addEventListener("click",()=>{
     }
     counter=0;
     sessionStorage.setItem("region",27);
+    sessionStorage.setItem("currentRegion","galar");
     boxPokemon.innerHTML='';
     hideResults();
     fetchData(`${API}pokedex/27`,30);
 })
+
+//hide more info
+let pathFailPokemon='./assets/images/poke.png';
+function closeMoreInfo(){
+    moreInfoPanel.classList.add('hidden')
+}
+async function showMoreInfo(e){
+    curtainMoreInfo.innerHTML='';
+    let pokeName=e.target.parentNode.children[1].textContent;
+    try {
+        let response=await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`);
+        let data=await response.json()
+        curtainMoreInfo.insertAdjacentHTML('beforeend',`
+            <div class="grid grid-cols-[1fr] min-[250px]:grid-cols-[repeat(2,_1fr)] min-[250px]:gap-y-[10px] gap-x-[10px] pt-[45px]">
+                <img class="m-auto" src="${data.sprites.front_default || pathFailPokemon}" alt="">
+                <img class="m-auto" src="${data.sprites.back_default || pathFailPokemon}" alt="">
+                <img class="m-auto" src="${data.sprites.front_shiny || pathFailPokemon}" alt="">
+                <img class="m-auto" src="${data.sprites.back_shiny || pathFailPokemon}" alt="">
+            </div>
+            <div class="font-bold capitalize text-xl tracking-wider">${pokeName}</div>
+            <div class="font-bold uppercase text-sm">${sessionStorage.getItem("currentRegion") || currentRegion}</div>
+            <div class="absolute w-full flex justify-end p-[5px]"><img id="close" class="cursor-pointer" src="./assets/images/close.svg" alt=""></div>`)
+        btnCloseMoreInfo=document.getElementById('close');
+        btnCloseMoreInfo.addEventListener("click",closeMoreInfo);
+    } catch (error) {
+        curtainMoreInfo.insertAdjacentHTML('beforeend',`
+            <div class="grid grid-cols-[1fr] min-[250px]:grid-cols-[repeat(2,_1fr)] min-[250px]:gap-y-[10px] gap-x-[10px] pt-[45px]">
+                <img class="m-auto" src="${pathFailPokemon}" alt="">
+                <img class="m-auto" src="${pathFailPokemon}" alt="">
+                <img class="m-auto" src="${pathFailPokemon}" alt="">
+                <img class="m-auto" src="${pathFailPokemon}" alt="">
+            </div>
+            <div class="font-bold capitalize text-xl tracking-wider">${pokeName}</div>
+            <div class="font-bold uppercase text-sm">${sessionStorage.getItem("currentRegion") || currentRegion}</div>
+            <div class="absolute w-full flex justify-end p-[5px]"><img id="close" class="cursor-pointer" src="./assets/images/close.svg" alt=""></div>`)
+        btnCloseMoreInfo=document.getElementById('close');
+        btnCloseMoreInfo.addEventListener("click",closeMoreInfo);
+    }
+
+    moreInfoPanel.classList.remove('hidden')
+ }
