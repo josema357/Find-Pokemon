@@ -36,11 +36,13 @@ async function searchPokemon(){
         hideResults();
         const foundPokemon= await loadBoxPokemon(inputElment.value.toLowerCase());
         boxPokemon.appendChild(foundPokemon)
-    }else{
-        region=sessionStorage.getItem("region")
+        inputElment.value=""
+    }else if(inputElment.value==""){
+        region=sessionStorage.getItem("region")||2;
         boxPokemon.innerHTML='';
         counter=0
         fetchData(`${API}pokedex/${region}`,30);
+        inputElment.value=""
     }
     
 }
@@ -160,25 +162,19 @@ function handleResult(event){
 }
 function handleResultKeydown(e){
     const {key}=e;
+    let textInput;
+    try {   
+        textInput=document.querySelector("#autocomplete-result-0").innerText;
+    } catch (error) {
+        textInput="";
+    }
+    
     switch (key){
         case 'Backspace':
-            return;
+            return
         case 'Enter':
+            inputElment.value=textInput || null;
             searchPokemon();
-            inputElment.setSelectionRange(inputElment.value.length,inputElment.value.length);
-        default:
-            selectFirstResult();
-    }
-}
-function selectFirstResult(){
-    const value=inputElment.value;
-    const autocompleteValue=resultsElem.querySelector(".selected");
-    if(!value || !autocompleteValue){
-        return;
-    }
-    if(value !==autocompleteValue.innerText){
-        inputElment.value=autocompleteValue.innerText;
-        inputElment.setSelectionRange(value.length,autocompleteValue.innerText.length);
     }
 }
 function selectItem(node){
