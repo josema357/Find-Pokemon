@@ -567,16 +567,16 @@ video {
   top: 100%;
 }
 
-.z-20 {
-  z-index: 20;
+.z-0 {
+  z-index: 0;
 }
 
 .z-10 {
   z-index: 10;
 }
 
-.z-0 {
-  z-index: 0;
+.z-20 {
+  z-index: 20;
 }
 
 .m-auto {
@@ -783,35 +783,6 @@ video {
 .bg-zinc-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(250 250 250 / var(--tw-bg-opacity));
-}
-
-.bg-\[red\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 0 0 / var(--tw-bg-opacity));
-}
-
-.bg-\[url\(\'\.\/assets\/images\/imageBackground\.webp\'\)\] {
-  background-image: url('./assets/images/imageBackground.webp');
-}
-
-.bg-\[url\(\'\.\.\/assets\/images\/imageBackground\.webp\'\)\] {
-  background-image: url('../assets/images/imageBackground.webp');
-}
-
-.bg-\[url\(\'assets\/images\/imageBackground\.webp\'\)\] {
-  background-image: url('assets/images/imageBackground.webp');
-}
-
-.bg-\[url\(\'\.\/assets\/images\/imageBackground\.jpg\'\)\] {
-  background-image: url('./assets/images/imageBackground.jpg');
-}
-
-.bg-\[url\(\'assets\/images\/imageBackground\.jpg\'\)\] {
-  background-image: url('assets/images/imageBackground.jpg');
-}
-
-.bg-\[url\(\'\.\/assets\/images\/ui-mobile\.jpg\'\)\] {
-  background-image: url('./assets/images/ui-mobile.jpg');
 }
 
 .bg-\[url\(\'\.\.\/src\/assets\/images\/imageBackground\.jpg\'\)\] {
